@@ -1,0 +1,46 @@
+input,
+button,
+textarea,
+select {
+    color: inherit;
+    font: inherit;
+    background-color: transparent;
+    border-style: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+* {
+    margin: 0;
+    outline-color: #a8add4;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+:after, :before {
+    text-decoration: inherit;
+    vertical-align: inherit;
+}
