@@ -1,12 +1,14 @@
 <template>
     <div class="theme-switcher">
-        <toggle v-model="isDarkTheme"></toggle>
+        <p class="theme-switcher__text">Темная тема</p>
+        <toggle :off-label="'Off'" :on-label="'On'" v-model="isDarkTheme"></toggle>
     </div>
 </template>
 
 <script>
 import Toggle from '@vueform/toggle';
 import { ref, watch } from 'vue';
+import '@vueform/toggle/themes/default.css';
 export default {
     components: {
         Toggle
@@ -33,4 +35,14 @@ export default {
 }
 </script>
 
-<style src="@vueform/toggle/themes/default.css"></style>
+<style lang="scss">
+    .theme-switcher {
+        position: absolute;
+        top: 60px;
+        right: 60px;
+
+        &__text {
+            color: var(--color-primary);
+        }
+    }
+</style>
