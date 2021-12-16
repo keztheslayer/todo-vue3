@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <theme-switcher />
     <todo-list />
   </div>
   
@@ -7,11 +8,13 @@
 
 <script>
 import TodoList from './components/TodoList.vue';
+import ThemeSwitcher from './components/ThemeSwitcher.vue';
 
 export default {
   name: 'App',
   components: {
     TodoList,
+    ThemeSwitcher,
   }
 }
 </script>
