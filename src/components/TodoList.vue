@@ -5,6 +5,8 @@
 <style lang="scss">
     .todo {
         width: 500px;
-        border: 1px solid black;
+        padding: 36px 24px 48px;
+        box-shadow: 12px 8px 40px rgba(0, 0, 0, 0.2);
+        background-color: var(--color-bg-app);
     }
 </style>

@@ -1,0 +1,16 @@
+:root {
+    --color-bg: #F2F2F2;
+    --color-bg-app: #F4F4F4;
+    --color-primary: #413F3F;
+    --color-ghost: #B5B5BA;
+    --color-done: #29ABE2;
+}
+
+:root[data-theme="dark"] {
+    --color-bg: #23272a;
+    --color-bg-app: #413F3F;
+    --color-primary: #F4F4F4;
+    --color-ghost: #B5B5BA;
+    --color-done: #29ABE2;
+}
+
