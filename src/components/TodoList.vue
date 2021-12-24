@@ -1,6 +1,10 @@
 <template>
     <div class="todo">Kek</div>
 </template>
+<script>
+
+
+</script>
 
 <style lang="scss">
     .todo {
@@ -8,5 +12,6 @@
         padding: 36px 24px 48px;
         box-shadow: 12px 8px 40px rgba(0, 0, 0, 0.2);
         background-color: var(--color-bg-app);
+        color: var(--color-primary);
     }
 </style>
