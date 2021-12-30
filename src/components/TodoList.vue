@@ -1,8 +1,17 @@
 <template>
-    <div class="todo">Kek</div>
+    <div class="todo">
+        <todo-item />
+    </div>
 </template>
 <script>
+import TodoItem from './TodoItem.vue';
 
+export default {
+    name: 'TodoList',
+    components: {
+        TodoItem,
+    },
+}
 
 </script>
 

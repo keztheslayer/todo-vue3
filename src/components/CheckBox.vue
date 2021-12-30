@@ -1,13 +1,33 @@
 <template>
     <div class="checkbox">
         <label class="checkbox__label">
-            <input type="checkbox" class="checkbox__input" />
+            <input v-bind="$attrs" type="checkbox" class="checkbox__input" :checked="modelValue" @change="handleChange($event.target.checked)"/>
             <span class="checkbox__mark"></span>
         </label>
     </div>
 </template>
 <script>
+export default {
+    inheritAttrs : false,
+    emits: [
+        'update:modelValue'
+    ],
+    props: {
+        modelValue: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    setup(_, { emit }) {
+        const handleChange = (val) => {
+            emit('update:modelValue', val);
+        }
 
+        return {
+            handleChange,
+        }
+    }
+}
 </script>
 <style lang="scss">
 .checkbox {
