@@ -1,31 +1,52 @@
 <template>
     <div class="item">
-        <check-box name="test" v-model="kek" />
-        {{ kek }}
-        <div></div>
-        <div></div>
+        <check-box :modelValue="done" @change="handleItemChange()" />
+        <div class="item__title" :class="{'item__title_done': done}">{{ title }}</div>
     </div>
 </template>
 <script>
 import CheckBox from './CheckBox.vue';
-import { ref } from 'vue';
+import mutations from '../store/mutations';
+import getters from '../store/getters';
 
 export default {
     name: 'TodoItem',
     components: {
         CheckBox,
     },
-    setup() {
-        const kek = ref( true );
-
+    props: {
+        done: Boolean,
+        title: String,
+        id: Number,
+    },
+    setup(props) {
+        const items = getters.items;
+        const handleItemChange = () => {
+            mutations.checkItem( props.id );
+        };
         return {
-            kek
+            items,
+            handleItemChange,
         }
     }
 }
 </script>
 <style lang="scss">
-    .item {
-        display: flex;
+@import '../styles/variables.scss';
+.item {
+    display: flex;
+    align-items: center;
+
+    &__title {
+        color: var(--color-primary);
+        margin-left: 12px;
+        @include font-default();
+
+        &_done {
+            text-decoration: line-through;
+            color: var(--color-ghost);
+        }
     }
+}
+
 </style>

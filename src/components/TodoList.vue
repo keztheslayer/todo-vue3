@@ -1,9 +1,17 @@
 <template>
     <div class="todo">
-        <todo-item />
+        {{ items }}
+        <todo-item
+            v-for="item in items"
+            :key="item.id"
+            :title="item.title"
+            :done="item.done"
+            :id="item.id"
+        />
     </div>
 </template>
-<script>
+<script>    
+import getters from '../store/getters';
 import TodoItem from './TodoItem.vue';
 
 export default {
@@ -11,6 +19,13 @@ export default {
     components: {
         TodoItem,
     },
+    setup() {
+        const items = getters.items;
+        
+        return {
+            items,
+        }
+    }
 }
 
 </script>
