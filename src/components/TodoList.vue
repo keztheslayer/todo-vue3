@@ -1,29 +1,36 @@
 <template>
     <div class="todo">
         {{ items }}
+        <todo-folder
+            v-for="folder in folders"
+            :key="folder.id"
+            :isOpen="true"
+            v-bind="folder"
+        />
         <todo-item
             v-for="item in items"
             :key="item.id"
-            :title="item.title"
-            :done="item.done"
-            :id="item.id"
+            v-bind="item"
         />
     </div>
 </template>
 <script>    
 import getters from '../store/getters';
 import TodoItem from './TodoItem.vue';
+import TodoFolder from './TodoFolder.vue';
 
 export default {
     name: 'TodoList',
     components: {
         TodoItem,
+        TodoFolder,
     },
     setup() {
-        const items = getters.items;
+        const { items, folders } = getters;
         
         return {
             items,
+            folders,
         }
     }
 }

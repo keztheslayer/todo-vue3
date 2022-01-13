@@ -36,8 +36,8 @@ export default {
     &__label {
         display: block;
         position: relative;
-        height: 24px;
-        width: 24px;
+        height: 20px;
+        width: 20px;
         border-radius: 6px;
         cursor: pointer;
 

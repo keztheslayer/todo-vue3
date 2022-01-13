@@ -1,6 +1,9 @@
 <template>
     <div class="item">
-        <check-box :modelValue="done" @change="handleItemChange()" />
+        <check-box 
+            :modelValue="done"
+            @change="handleItemChange()" 
+        />
         <div class="item__title" :class="{'item__title_done': done}">{{ title }}</div>
     </div>
 </template>
@@ -36,6 +39,7 @@ export default {
 .item {
     display: flex;
     align-items: center;
+    margin: 8px 0;
 
     &__title {
         color: var(--color-primary);
