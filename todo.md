@@ -8,8 +8,9 @@ https://www.figma.com/file/KFL5fKPJwbbzPFToWvdeHU/Simple-to-do-list-(Community)?
 - ~~[ ] Сверстать туду-лист~~
 - [v] Компонент чекбокса
 - [v] Компонент таска
-- [ ] Компонент папки
+- [v] Компонент папки
 - [ ] Компонент инпута для новой таски
-- [ ] Настроить вывод тасок из json в приложении
-- [ ] Настроить вывод из какого-нибудь стора
-- [ ] Get/Set в localStorage
+- [ ] Удаление таски
+- [v] Настроить вывод тасок из json в приложении
+- [v] Настроить вывод из какого-нибудь стора
+- [ ] Get/Set в localStorage (save ls to local => watch local state => save to ls)
