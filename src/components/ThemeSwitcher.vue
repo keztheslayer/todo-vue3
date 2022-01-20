@@ -38,8 +38,8 @@ export default {
 <style lang="scss">
     .theme-switcher {
         position: absolute;
-        top: 60px;
-        right: 60px;
+        top: 36px;
+        right: 36px;
 
         &__text {
             color: var(--color-primary);

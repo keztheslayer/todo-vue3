@@ -3,22 +3,33 @@
         <div class="folder__header">
             <div class="folder__icon"></div>
             <div class="folder__title">{{ title }}</div>
-            <button class="folder__expand"></button>
+            <button 
+                class="folder__expand"
+                @click="isOpened = !isOpened"
+                :class="{'folder__expand_opened': isOpened}"
+            ></button>
             <div v-if="items.length > 0" class="folder__counter">{{ itemsCount }}</div>
         </div>
-        <div class="folder__items">
-            <todo-item
-                v-for="item in items"
-                :key="item.id"
-                :folder-id="id"
-                v-bind="item"
-            />
-        </div>
+        <transition
+            name="fade"
+        >
+            <div
+                v-if="isOpened"
+                class="folder__items"
+            >
+                <todo-item
+                    v-for="item in items"
+                    :key="item.id"
+                    :folder-id="id"
+                    v-bind="item"
+                />
+            </div>
+        </transition>
     </div>
 </template>
 <script>
 import TodoItem from './TodoItem.vue';
-import { computed, toRefs } from 'vue';
+import { computed, toRefs, ref } from 'vue';
 
 export default {
     components : {
@@ -31,15 +42,17 @@ export default {
         items: Array
     },
     setup( props ) {
+        const isOpened = ref(false);
         const { items } = toRefs(props);
         const itemsCount = computed(() => {
             const doneItems = items.value.filter( item => item.done );
 
             return `${doneItems.length}/${items.value.length}`
-        })
+        });
 
         return {
             itemsCount,
+            isOpened
         }
     }
 }
@@ -93,6 +106,12 @@ export default {
         outline: none;
         cursor: pointer;
         background: url('../assets/icons/arrow.svg') no-repeat center/contain;
+        transition: transform 0.3s;
+        filter: var(--icon-filter);
+
+        &_opened {
+            transform: rotate(180deg);
+        }
     }
 
     &__counter {
@@ -107,5 +126,18 @@ export default {
         margin-left: 12px;
         font-size: 11px;
     }
+}
+.fade-enter-active,
+.fade-leave-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.4s ease;
+    transition-property: opacity, transform;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    transform: translateY(-15px);
 }
 </style>
