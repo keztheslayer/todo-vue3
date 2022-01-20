@@ -56,6 +56,10 @@ export default {
         &:checked + .checkbox__mark {
             border-color: var(--color-done);
             background-color: var(--color-done);
+
+            &:after {
+                display: block;
+            }
         }
     }
 
@@ -79,6 +83,7 @@ export default {
             width: 12px;
             height: 9px;
             background: url('../assets/icons/check.svg') no-repeat center/contain;
+            display: none;
         }
     }
 }
