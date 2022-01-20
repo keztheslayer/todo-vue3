@@ -4,12 +4,13 @@
             <div class="folder__icon"></div>
             <div class="folder__title">{{ title }}</div>
             <button class="folder__expand"></button>
-            <div v-if="items.length > 0" class="folder__counter">{{ items.length }} </div>
+            <div v-if="items.length > 0" class="folder__counter">{{ itemsCount }}</div>
         </div>
         <div class="folder__items">
             <todo-item
                 v-for="item in items"
                 :key="item.id"
+                :folder-id="id"
                 v-bind="item"
             />
         </div>
@@ -17,6 +18,8 @@
 </template>
 <script>
 import TodoItem from './TodoItem.vue';
+import { computed, toRefs } from 'vue';
+
 export default {
     components : {
         TodoItem
@@ -27,6 +30,18 @@ export default {
         isOpen: Boolean,
         items: Array
     },
+    setup( props ) {
+        const { items } = toRefs(props);
+        const itemsCount = computed(() => {
+            const doneItems = items.value.filter( item => item.done );
+
+            return `${doneItems.length}/${items.value.length}`
+        })
+
+        return {
+            itemsCount,
+        }
+    }
 }
 </script>
 <style lang="scss">

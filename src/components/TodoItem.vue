@@ -21,11 +21,15 @@ export default {
         done: Boolean,
         title: String,
         id: Number,
+        folderId: {
+            type: [Number, null],
+            default: null,
+        }
     },
     setup(props) {
         const items = getters.items;
         const handleItemChange = () => {
-            mutations.checkItem( props.id );
+            mutations.checkItem( props.id, props.folderId );
         };
         return {
             items,
