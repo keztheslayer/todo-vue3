@@ -49,6 +49,7 @@ export default {
         height: 18px;
         background: url('../assets/icons/folder.svg') no-repeat center/contain;
         margin-right: 12px;
+        filter: var(--icon-filter);
     }
 
     &__title {

@@ -5,6 +5,7 @@
     --color-primary: #413F3F;
     --color-ghost: #B5B5BA;
     --color-done: #29ABE2;
+    --icon-filter: none;
 }
 
 :root[data-theme="dark"] {
@@ -13,5 +14,6 @@
     --color-primary: #F4F4F4;
     --color-ghost: #B5B5BA;
     --color-done: #29ABE2;
+    --icon-filter: invert(100%) sepia(34%) saturate(169%) hue-rotate(178deg) brightness(115%) contrast(90%);
 }
 
