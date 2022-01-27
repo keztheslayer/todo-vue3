@@ -14,25 +14,35 @@
             :key="item.id"
             v-bind="item"
         />
+        <add-item
+            @add="addItem"
+        />
     </div>
 </template>
 <script>    
 import getters from '../store/getters';
+import mutations from '../store/mutations';
 import TodoItem from './TodoItem.vue';
 import TodoFolder from './TodoFolder.vue';
+import AddItem from './AddItem.vue';
 
 export default {
     name: 'TodoList',
     components: {
         TodoItem,
         TodoFolder,
+        AddItem,
     },
     setup() {
         const { items, folders } = getters;
+        const addItem = ( newItemName ) => {
+            mutations.addItem( newItemName )
+        }
         
         return {
             items,
             folders,
+            addItem,
         }
     }
 }

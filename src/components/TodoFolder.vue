@@ -23,6 +23,9 @@
                     :folder-id="id"
                     v-bind="item"
                 />
+                <add-item
+                    @add="addItem"
+                />
             </div>
         </transition>
     </div>
@@ -30,10 +33,13 @@
 <script>
 import TodoItem from './TodoItem.vue';
 import { computed, toRefs, ref } from 'vue';
+import mutations from '../store/mutations';
+import AddItem from './AddItem.vue';
 
 export default {
     components : {
-        TodoItem
+        TodoItem,
+        AddItem,
     },
     props: {
         title: String,
@@ -49,10 +55,14 @@ export default {
 
             return `${doneItems.length}/${items.value.length}`
         });
+        const addItem = ( newItemName ) => {
+            mutations.addItem( newItemName, props.id )
+        }
 
         return {
             itemsCount,
-            isOpened
+            isOpened,
+            addItem,
         }
     }
 }
