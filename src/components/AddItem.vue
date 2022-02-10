@@ -46,9 +46,18 @@ export default {
 
     &__input {
         flex-grow: 1;
-        border: 1px solid var(--color-ghost);
+        border: none;
         padding: 4px 8px;
-        border-radius: 4px;
+        color: var(--color-primary);
+        transition: color 0.3s ease-in-out;
+
+        &:focus {
+            border: none;
+            outline: none;
+            &::placeholder {
+                color: var(--color-primary);
+            }
+        }
     }
 }
 .app-button {
