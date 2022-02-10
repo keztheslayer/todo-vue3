@@ -1,8 +1,5 @@
 <template>
     <div class="todo">
-        {{ items }}
-        <hr>
-        {{ folders }}
         <todo-folder
             v-for="folder in folders"
             :key="folder.id"

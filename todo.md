@@ -11,5 +11,5 @@ https://www.figma.com/file/KFL5fKPJwbbzPFToWvdeHU/Simple-to-do-list-(Community)?
 - [v] Настроить вывод тасок из json в приложении
 - [v] Настроить вывод из какого-нибудь стора
 - [v] Компонент инпута для новой таски
-- [ ] Удаление таски
-- [ ] Get/Set в localStorage (save ls to local => watch local state => save to ls)
+- [v] Удаление таски
+- [v] Get/Set в localStorage (save ls to state => watch local state => save to ls)

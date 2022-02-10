@@ -95,6 +95,7 @@ export default {
         flex-grow: 1;
         align-items: center;
         color: var(--color-primary);
+        white-space: nowrap;
         @include font-default();
 
         &:after {
