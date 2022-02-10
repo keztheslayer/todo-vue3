@@ -1,6 +1,6 @@
 import state from './state'
 
-const getItemsLocation = ( folderId ) => {
+const getItemsArray = ( folderId ) => {
     let placeToSearch = null;
         
     if ( folderId ) {
@@ -10,24 +10,29 @@ const getItemsLocation = ( folderId ) => {
         placeToSearch = state;
     }
 
-    return placeToSearch;
+    return placeToSearch.items;
 }
 
 const mutations = {
     checkItem( id, folderId ) {
-        const neededItem = getItemsLocation( folderId ).items.find( item => item.id === id);
+        const neededItem = getItemsArray( folderId ).find( item => item.id === id);
 
         neededItem.done = !neededItem.done;
     },
     addItem( title, folderId ) {
         const id = new Date().valueOf();
 
-        getItemsLocation( folderId ).items.push({
+        getItemsArray( folderId ).push({
             id,
             title,
             done: false,
         })
-    }
+    },
+    removeItem( id, folderId ) {
+        const array = getItemsArray( folderId );
+        const index = array.findIndex( item => item.id === id);
+        array.splice( index, 1 );
+    },
 }
 
 export default mutations;

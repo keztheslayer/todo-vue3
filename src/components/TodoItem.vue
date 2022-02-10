@@ -5,8 +5,9 @@
             @change="handleItemChange()" 
         />
         <div class="item__title" :class="{'item__title_done': done}">{{ title }}</div>
-        <button 
+        <button
             class="item__button-remove"
+            @click="removeItem"
         />
     </div>
 </template>
@@ -34,9 +35,13 @@ export default {
         const handleItemChange = () => {
             mutations.checkItem( props.id, props.folderId );
         };
+        const removeItem = () => {
+            mutations.removeItem( props.id, props.folderId );
+        }
         return {
             items,
             handleItemChange,
+            removeItem,
         }
     }
 }
