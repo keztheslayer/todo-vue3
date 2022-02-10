@@ -5,6 +5,9 @@
             @change="handleItemChange()" 
         />
         <div class="item__title" :class="{'item__title_done': done}">{{ title }}</div>
+        <button 
+            class="item__button-remove"
+        />
     </div>
 </template>
 <script>
@@ -45,6 +48,12 @@ export default {
     align-items: center;
     margin: 8px 0;
 
+    &:hover {
+        & .item__button-remove {
+            display: block;
+        }
+    }
+
     &__title {
         color: var(--color-primary);
         margin-left: 12px;
@@ -54,6 +63,16 @@ export default {
             text-decoration: line-through;
             color: var(--color-ghost);
         }
+    }
+
+    &__button-remove {
+        display: none;
+        margin-left: auto;
+        width: 18px;
+        height: 18px;
+        background: url('../assets/icons/trash.svg') no-repeat center/contain;
+        filter: var(--icon-filter);
+        cursor: pointer;
     }
 }
 
