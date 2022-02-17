@@ -12,7 +12,8 @@
             v-bind="item"
         />
         <add-item
-            @add="addItem"
+            @add-item="addItem"
+            @add-folder="addFolder"
         />
     </div>
 </template>
@@ -35,11 +36,16 @@ export default {
         const addItem = ( newItemName ) => {
             mutations.addItem( newItemName )
         }
+
+        const addFolder = ( newFolderName ) => {
+            mutations.addFolder( newFolderName )
+        }
         
         return {
             items,
             folders,
             addItem,
+            addFolder,
         }
     }
 }

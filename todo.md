@@ -13,3 +13,6 @@ https://www.figma.com/file/KFL5fKPJwbbzPFToWvdeHU/Simple-to-do-list-(Community)?
 - [v] Компонент инпута для новой таски
 - [v] Удаление таски
 - [v] Get/Set в localStorage (save ls to state => watch local state => save to ls)
+- [v] Добавление папки
+- [ ] Удаление папки
+- [ ] Переименование тасок и папок

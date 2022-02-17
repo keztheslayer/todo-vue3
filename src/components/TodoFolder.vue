@@ -24,7 +24,8 @@
                     v-bind="item"
                 />
                 <add-item
-                    @add="addItem"
+                    @add-item="addItem"
+                    :folder-create="false"
                 />
             </div>
         </transition>

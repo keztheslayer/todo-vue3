@@ -1,15 +1,23 @@
 <template>
-    <form @submit.prevent="addItem" class="add-item">
+    <form @submit.prevent="add()" class="add-item">
         <input
             v-model="textItem"
             type="text"
-            placeholder="Введите новую задачу"
+            placeholder="Введите название"
             class="add-item__input"
         />
         <button 
             class="app-button"
             type="submit"
             :disabled="textItem === ''"
+        >
+            +
+        </button>
+        <button
+            v-if="folderCreate" 
+            class="app-button app-button_type_folder"            
+            :disabled="textItem === ''"
+            @click="add('folder')"
         >
             +
         </button>
@@ -20,19 +28,26 @@
 import { ref } from 'vue'
 
 export default {
+    props: {
+        folderCreate: {
+            type: Boolean,
+            default: true,
+        }
+    },
     setup( props, { emit } ) {
         const textItem = ref('');
 
-        const addItem = () => {
+        const add = ( type = 'item' ) => {
+
             if ( textItem.value !== '' ) {
-                emit('add', textItem.value);
+                emit(`add-${type}`, textItem.value);
                 textItem.value = '';
             }            
         }
-        
+       
         return { 
             textItem, 
-            addItem,
+            add,
         }
     }
 }
@@ -41,7 +56,7 @@ export default {
 <style lang="scss">
 .add-item {
     margin-top: 16px;
-    display: flex;
+    display: flex;  
     align-items: center;
 
     &__input {
@@ -74,6 +89,12 @@ export default {
     &[disabled] {
         cursor: default;
         opacity: 0.5;
+    }
+
+    &_type_folder {
+        background: url('../assets/icons/folder.svg') no-repeat center;
+        background-size: 123%;
+        filter: var(--icon-filter);
     }
 }
 </style>

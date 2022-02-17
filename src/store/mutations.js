@@ -28,6 +28,16 @@ const mutations = {
             done: false,
         })
     },
+    addFolder( title ) {
+        const id = new Date().valueOf();
+        const folder = {
+            title,
+            id,
+            items: [],
+        }
+
+        state.folders.push(folder);
+    },
     removeItem( id, folderId ) {
         const array = getItemsArray( folderId );
         const index = array.findIndex( item => item.id === id);
