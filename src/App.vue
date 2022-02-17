@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <theme-switcher />
-    <todo-list :data="data"/>
+    <todo-list/>
   </div>
   
 </template>
@@ -9,7 +9,6 @@
 <script>
 import TodoList from './components/TodoList.vue';
 import ThemeSwitcher from './components/ThemeSwitcher.vue';
-import fakeData from './utils/fakeData';
 
 export default {
   name: 'App',
@@ -18,11 +17,6 @@ export default {
     ThemeSwitcher,
   },
   setup() {
-    const data = fakeData;
-
-    return {
-      data
-    }
   }
 }
 </script>
