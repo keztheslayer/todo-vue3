@@ -1,14 +1,20 @@
 <template>
     <div class="folder" >
         <div class="folder__header">
-            <div class="folder__icon"></div>
+            <div class="folder__control">
+                <div class="folder__icon">{{ itemsCount }}</div>
+                <button
+                    class="folder__button-remove"
+                    @click="removeFolder"
+                />
+            </div>
+
             <div class="folder__title">{{ title }}</div>
-            <button 
+            <button
                 class="folder__expand"
                 @click="isOpened = !isOpened"
                 :class="{'folder__expand_opened': isOpened}"
             ></button>
-            <div v-if="items.length > 0" class="folder__counter">{{ itemsCount }}</div>
         </div>
         <transition
             name="fade"
@@ -54,7 +60,7 @@ export default {
         const itemsCount = computed(() => {
             const doneItems = items.value.filter( item => item.done );
 
-            return `${doneItems.length}/${items.value.length}`
+            return `${doneItems.length} / ${items.value.length}`
         });
         const addItem = ( newItemName ) => {
             mutations.addItem( newItemName, props.id )
@@ -84,11 +90,53 @@ export default {
     }
 
     &__icon {
-        width: 24px;
-        height: 18px;
-        background: url('../assets/icons/folder.svg') no-repeat center/contain;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 24px;
+        font-size: 10px;
+        color: var(--color-primary);
+        z-index: 1;
+
+        &::before {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            content: '';
+            background: url('../assets/icons/folder.svg') no-repeat center/contain;
+            z-index: -1;
+            filter: var(--icon-filter);
+        }
+    }
+
+    &__control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 24px;
         margin-right: 12px;
+
+        &:hover {
+            .folder__icon {
+                display: none;
+            }
+
+            .folder__button-remove {
+                display: block;
+            }
+        }
+    }
+
+    &__button-remove {
+        display: none;
+        width: 18px;
+        height: 18px;
+        background: url('../assets/icons/trash.svg') no-repeat center/contain;
         filter: var(--icon-filter);
+        cursor: pointer;
     }
 
     &__title {
