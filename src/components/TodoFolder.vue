@@ -9,7 +9,14 @@
                 />
             </div>
 
-            <div class="folder__title">{{ title }}</div>
+            <div 
+                class="folder__title"
+                contenteditable="true"
+                @input="editFolder"
+                @keydown.enter.escape.prevent="editFolder && $event.target.blur()"
+            >
+                {{ title }}
+            </div>
             <button
                 class="folder__expand"
                 @click="isOpened = !isOpened"
@@ -70,11 +77,16 @@ export default {
             mutations.removeFolder( props.id )
         }
 
+        const editFolder = (event) => {
+            mutations.editFolder( props.id, event.target.textContent );
+        }
+
         return {
             itemsCount,
             isOpened,
             addItem,
             removeFolder,
+            editFolder
         }
     }
 }
