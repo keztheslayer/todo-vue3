@@ -4,7 +4,15 @@
             :modelValue="done"
             @change="handleItemChange()" 
         />
-        <div class="item__title" :class="{'item__title_done': done}">{{ title }}</div>
+        <div 
+            class="item__title"
+            :class="{'item__title_done': done}"
+            contenteditable="true"
+            @input="editItem"
+            @keydown.enter.escape.prevent="editItem && $event.target.blur()"
+        >
+            {{ title }}
+        </div>
         <button
             class="item__button-remove"
             @click="removeItem"
@@ -37,11 +45,15 @@ export default {
         };
         const removeItem = () => {
             mutations.removeItem( props.id, props.folderId );
+        };
+        const editItem = (event) => {
+           mutations.editItem( props.id, props.folderId, event.target.textContent );
         }
         return {
             items,
             handleItemChange,
             removeItem,
+            editItem,
         }
     }
 }

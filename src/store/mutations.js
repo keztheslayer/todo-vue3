@@ -46,6 +46,12 @@ const mutations = {
     removeFolder( folderId ) {
         const index = state.folders.findIndex( folder => folder.id === folderId);
         state.folders.splice( index, 1 );
+    },
+    editItem( id, folderId, title ) {
+        const array = getItemsArray( folderId );
+        const item = array.find( item => item.id === id);
+        
+        item.title = title;
     }
 }
 
