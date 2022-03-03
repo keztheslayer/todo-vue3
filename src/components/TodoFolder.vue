@@ -66,10 +66,15 @@ export default {
             mutations.addItem( newItemName, props.id )
         }
 
+        const removeFolder = () => {
+            mutations.removeFolder( props.id )
+        }
+
         return {
             itemsCount,
             isOpened,
             addItem,
+            removeFolder,
         }
     }
 }
