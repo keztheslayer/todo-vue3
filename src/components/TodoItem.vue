@@ -1,16 +1,23 @@
 <template>
+    <div
+        class="q"
+        :style="dotStyle"
+    >
+    </div>
     <div class="item"
         :data-item-id="id"
         @dragstart="onDragStart"
         @dragend="onDragEnd"
-        @drag="onDrag"
         @mousedown="onMouseDown"
         @dragenter="onDragEnter"
+        @dragleave="onDragleave"
+        @dragover="onDragOver"
+        @drop="onDrop"
         draggable="true"
     >
-        <check-box 
+        <check-box
             :modelValue="done"
-            @change="handleItemChange()" 
+            @change="handleItemChange()"
         />
         <div
             class="item__title"
@@ -35,9 +42,12 @@
     </div>
 </template>
 <script>
+import { reactive } from 'vue';
 import CheckBox from './CheckBox.vue';
 import mutations from '../store/mutations';
 import getters from '../store/getters';
+import { dragItem } from '../core/dragItem';
+import _ from 'lodash-es'
 
 export default {
     name: 'TodoItem',
@@ -54,6 +64,13 @@ export default {
         }
     },
     setup(props) {
+        // clientX, clientY - Координаты курсора
+        // Высчитываем расстояние от верха экрана до TodoItem, учитываем высоту TodoItem и навешиваем нужные стили
+        // Тень/бордер на место падения TodoItem'а
+        const dotStyle = reactive({
+            top: '0px',
+            left: '0px'
+        })
         const items = getters.items;
         const handleItemChange = () => {
             mutations.checkItem( props.id, props.folderId );
@@ -66,18 +83,26 @@ export default {
         }
         const onDragStart = (event) => {
             event.target.style.opacity = 0.5;
-            console.log('Drag start', event);
+            dragItem.value = event.target;
         }
         const onDragEnd = (event) => {
             event.target.removeAttribute('style');
-            console.log('Drag end', event);
         }
-        const onDrag = () => {
-            //console.log('Drag', event);
-        }
+
         const onDragEnter = (event) => {
-            event.target.style.background = "purple";
-            console.log('on drag enter', event);
+            event.target.style.outline = '2px solid var(--color-done)';
+        }
+        const onDragleave = (event) => {
+            event.target.style.outline = '';
+        }
+        const onDragOver = (event) => {
+            event.preventDefault();
+            dotStyle.top = event.clientY + 'px';
+            dotStyle.left = event.clientX + 'px';
+        }
+        const onDrop = (event) => {
+            event.target.style.outline = '';
+            console.log('Drop!!!!!!!', event, dragItem.value)
         }
         const onMouseDown = (event) => {
             if ( event.target.dataset.action === 'edit' ) {
@@ -87,6 +112,14 @@ export default {
                 event.preventDefault();
             }
         }
+
+        const documentDragOver = ( event ) => {
+            event.preventDefault();
+            console.log('DragOver')
+        }
+
+        document.addEventListener('dragover', _.throttle(documentDragOver, 400))
+
         return {
             items,
             handleItemChange,
@@ -94,9 +127,12 @@ export default {
             editItem,
             onDragStart,
             onDragEnd,
-            onDrag,
             onMouseDown,
             onDragEnter,
+            onDragleave,
+            onDragOver,
+            onDrop,
+            dotStyle
         }
     }
 }
@@ -138,7 +174,7 @@ export default {
         width: 18px;
         height: 18px;
         filter: var(--icon-filter);
-        cursor: pointer;  
+        cursor: pointer;
         &:hover {
             opacity: 0.8;
         }
@@ -153,5 +189,16 @@ export default {
         background: url('../assets/icons/move.svg') no-repeat center/contain;
     }
 }
+
+.q {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    position: fixed;
+    transition: all 0.2s ease;
+    top: 0;
+    left: 0;
+}
+
 
 </style>
